@@ -472,12 +472,14 @@ function showCelebration(treino){
   document.getElementById('cel-icon').textContent=t.celebIcon;
   document.getElementById('cel-sub').textContent=t.celebMsg;
   document.getElementById('cel-bg').classList.add('show');
+  document.getElementById('cel-overlay').classList.add('active');
   setTimeout(()=>document.getElementById('cel-card').classList.add('show'),50);
   spawnConfetti();
   setTimeout(closeCelebration,3500);
 }
 function closeCelebration(){
   document.getElementById('cel-bg').classList.remove('show');
+  document.getElementById('cel-overlay').classList.remove('active');
   document.getElementById('cel-card').classList.remove('show');
   document.getElementById('confetti-wrap').innerHTML='';
 }

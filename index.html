@@ -1549,20 +1549,15 @@ function closeModal(id)      { document.getElementById(id).classList.add('hidden
 // INIT
 // ════════════════════════════════════════════
 (function init() {
-  const saved = localStorage.getItem('fb_config');
-  if (saved) {
-    try {
-      // pre-fill fields
-      const cfg = JSON.parse(saved);
-      ['apiKey','authDomain','projectId','storageBucket','messagingSenderId','appId'].forEach(k => {
-        const el = document.getElementById('cfg-' + k);
-        if (el) el.value = cfg[k] || '';
-      });
-      initFirebase(cfg);
-      return;
-    } catch(e) {}
-  }
-  showScreen('config');
+  const cfg = {
+    apiKey:            "AIzaSyB8YifHb5gWMHn8SeDKRqGauM8vfmKFDMs",
+    authDomain:        "upper30-45625.firebaseapp.com",
+    projectId:         "upper30-45625",
+    storageBucket:     "upper30-45625.firebasestorage.app",
+    messagingSenderId: "341797184688",
+    appId:             "1:341797184688:web:cccf88c9d5d08997370775"
+  };
+  initFirebase(cfg);
 })();
 </script>
 </body>

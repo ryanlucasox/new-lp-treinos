@@ -614,8 +614,12 @@ body {
   align-items: center;
   justify-content: center;
   pointer-events: none;
+  visibility: hidden;
 }
-.celebration-overlay.active { pointer-events: all; }
+.celebration-overlay.active {
+  pointer-events: all;
+  visibility: visible;
+}
 
 .celebration-card {
   background: var(--bg2);
@@ -659,10 +663,11 @@ body {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   opacity: 0;
+  pointer-events: none;
   transition: opacity .3s;
   z-index: 299;
 }
-.celebration-bg.show { opacity: 1; }
+.celebration-bg.show { opacity: 1; pointer-events: all; }
 
 /* confetti particles */
 .confetti-wrap {

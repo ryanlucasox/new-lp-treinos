@@ -1,0 +1,640 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guia de Treino — Upper Body 30 Dias</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;0,500;1,300&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #0e0f11;
+    --bg2: #16181c;
+    --bg3: #1e2128;
+    --border: rgba(255,255,255,0.07);
+    --border2: rgba(255,255,255,0.12);
+    --text: #f0f0ee;
+    --muted: #8a8c91;
+    --accent-a: #e8d5a3;
+    --accent-b: #7fb8a0;
+    --accent-c: #c07a6a;
+    --accent-rest: #4a5568;
+    --red: #e05252;
+    --yellow: #e8c56a;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    line-height: 1.65;
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  .header {
+    background: var(--bg2);
+    border-bottom: 1px solid var(--border);
+    padding: 0 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+    height: 56px;
+  }
+  .header-logo {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: 15px;
+    letter-spacing: .08em;
+    text-transform: uppercase;
+    color: var(--text);
+  }
+  .header-nav {
+    display: flex;
+    gap: 4px;
+    margin-left: auto;
+  }
+  .nav-btn {
+    background: transparent;
+    border: none;
+    color: var(--muted);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .nav-btn:hover, .nav-btn.active { background: var(--bg3); color: var(--text); }
+
+  /* MAIN LAYOUT */
+  .main { max-width: 960px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+
+  /* HERO */
+  .hero {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 2rem;
+    align-items: start;
+    margin-bottom: 2.5rem;
+    padding-bottom: 2rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .hero-title {
+    font-family: 'Syne', sans-serif;
+    font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    line-height: 1.1;
+    letter-spacing: -.02em;
+  }
+  .hero-title span { color: var(--accent-a); }
+  .hero-sub {
+    font-size: 14px;
+    color: var(--muted);
+    margin-top: 8px;
+    font-weight: 300;
+  }
+  .imc-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+    min-width: 200px;
+  }
+  .stat-card {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .7rem .9rem;
+  }
+  .stat-label { font-size: 10px; text-transform: uppercase; letter-spacing: .08em; color: var(--muted); }
+  .stat-val { font-family: 'Syne', sans-serif; font-size: 1.4rem; font-weight: 700; margin-top: 2px; }
+  .stat-sub { font-size: 10px; color: var(--muted); margin-top: 1px; }
+  .imc-warn { color: var(--yellow); }
+
+  /* ALERT */
+  .alert {
+    background: rgba(224,82,82,.12);
+    border: 1px solid rgba(224,82,82,.3);
+    border-radius: 10px;
+    padding: .75rem 1rem;
+    font-size: 13px;
+    color: #f5a5a5;
+    margin-bottom: 2rem;
+    display: flex;
+    gap: 8px;
+    align-items: flex-start;
+  }
+  .alert-icon { font-size: 15px; flex-shrink: 0; margin-top: 1px; }
+
+  /* SECTION TITLES */
+  .section-head {
+    display: flex;
+    align-items: baseline;
+    gap: 10px;
+    margin-bottom: 1rem;
+  }
+  .section-title {
+    font-family: 'Syne', sans-serif;
+    font-size: .7rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .12em;
+    color: var(--muted);
+  }
+  .section-line { flex: 1; height: 1px; background: var(--border); }
+
+  /* TABS */
+  .tabs {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 1.25rem;
+    flex-wrap: wrap;
+  }
+  .tab {
+    font-family: 'DM Sans', sans-serif;
+    font-size: 12px;
+    font-weight: 500;
+    padding: 5px 14px;
+    border-radius: 20px;
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .15s;
+  }
+  .tab:hover { color: var(--text); border-color: rgba(255,255,255,0.2); }
+  .tab.on-a { background: rgba(232,213,163,.15); color: var(--accent-a); border-color: rgba(232,213,163,.3); }
+  .tab.on-b { background: rgba(127,184,160,.15); color: var(--accent-b); border-color: rgba(127,184,160,.3); }
+  .tab.on-c { background: rgba(192,122,106,.15); color: var(--accent-c); border-color: rgba(192,122,106,.3); }
+
+  /* EXERCISE TABLE */
+  .ex-list { display: flex; flex-direction: column; gap: 6px; }
+  .ex-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: .85rem 1rem;
+    display: grid;
+    grid-template-columns: 28px 1fr auto;
+    gap: 10px;
+    align-items: start;
+    transition: border-color .15s;
+  }
+  .ex-card:hover { border-color: var(--border2); }
+  .ex-num {
+    font-family: 'Syne', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    color: var(--muted);
+    margin-top: 2px;
+  }
+  .ex-name {
+    font-weight: 500;
+    font-size: 14px;
+    color: var(--text);
+    margin-bottom: 3px;
+  }
+  .ex-muscle {
+    font-size: 12px;
+    color: var(--muted);
+    font-weight: 300;
+  }
+  .ex-obs {
+    font-size: 11.5px;
+    color: var(--muted);
+    font-style: italic;
+    margin-top: 4px;
+    line-height: 1.5;
+  }
+  .badge {
+    font-size: 10px;
+    font-weight: 500;
+    padding: 3px 9px;
+    border-radius: 20px;
+    white-space: nowrap;
+    letter-spacing: .02em;
+    margin-top: 2px;
+  }
+  .badge-c { background: rgba(55,138,221,.15); color: #6ab0e8; border: 1px solid rgba(55,138,221,.25); }
+  .badge-i { background: rgba(99,153,34,.15); color: #90c060; border: 1px solid rgba(99,153,34,.25); }
+
+  /* CALENDAR */
+  .calendar-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 6px;
+  }
+  .cal-day {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: .5rem .4rem;
+    text-align: center;
+    cursor: pointer;
+    transition: all .15s;
+    min-height: 62px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 3px;
+  }
+  .cal-day:hover { border-color: var(--border2); }
+  .cal-day.sel { border-width: 1.5px; }
+  .cal-day.sel-a { border-color: var(--accent-a); background: rgba(232,213,163,.06); }
+  .cal-day.sel-b { border-color: var(--accent-b); background: rgba(127,184,160,.06); }
+  .cal-day.sel-c { border-color: var(--accent-c); background: rgba(192,122,106,.06); }
+  .cal-day.sel-r { border-color: var(--accent-rest); background: rgba(74,85,104,.06); }
+  .cal-wd { font-size: 9px; text-transform: uppercase; letter-spacing: .06em; color: var(--muted); }
+  .cal-n { font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 700; }
+  .cal-n.col-a { color: var(--accent-a); }
+  .cal-n.col-b { color: var(--accent-b); }
+  .cal-n.col-c { color: var(--accent-c); }
+  .cal-n.col-r { color: var(--accent-rest); }
+  .cal-sub { font-size: 9px; color: var(--muted); }
+  .week-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: .08em;
+    color: var(--muted);
+    margin: 1rem 0 .4rem;
+    font-weight: 500;
+  }
+
+  /* PROGRESSION */
+  .prog-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  @media(max-width:560px){ .prog-grid { grid-template-columns: 1fr; } .imc-grid { min-width: 160px; } .hero { grid-template-columns: 1fr; } .calendar-grid { grid-template-columns: repeat(5, 1fr); } }
+  .prog-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem 1.1rem;
+  }
+  .prog-week {
+    font-family: 'Syne', sans-serif;
+    font-size: .65rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .1em;
+    color: var(--muted);
+    margin-bottom: 4px;
+  }
+  .prog-strat {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text);
+    margin-bottom: 8px;
+  }
+  .prog-detail {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+  }
+  .prog-pill {
+    font-size: 11px;
+    padding: 3px 10px;
+    border-radius: 20px;
+    background: var(--bg3);
+    color: var(--muted);
+    border: 1px solid var(--border);
+  }
+  .prog-pill strong { color: var(--text); font-weight: 500; }
+
+  /* TIPS */
+  .tip-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+  @media(max-width:620px){ .tip-grid { grid-template-columns: 1fr; } }
+  .tip-card {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 1rem;
+  }
+  .tip-icon { font-size: 20px; margin-bottom: 8px; }
+  .tip-title { font-size: 13px; font-weight: 500; margin-bottom: 4px; }
+  .tip-body { font-size: 12px; color: var(--muted); line-height: 1.6; font-weight: 300; }
+
+  /* TRACKER */
+  .tracker-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(36px, 1fr)); gap: 6px; }
+  .tracker-day {
+    aspect-ratio: 1;
+    border-radius: 6px;
+    border: 1px solid var(--border);
+    background: var(--bg2);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    font-weight: 500;
+    color: var(--muted);
+    cursor: pointer;
+    transition: all .15s;
+    font-family: 'Syne', sans-serif;
+  }
+  .tracker-day.done { background: rgba(127,184,160,.2); border-color: var(--accent-b); color: var(--accent-b); }
+  .tracker-day:hover { border-color: var(--border2); }
+
+  /* PAGE SECTIONS */
+  .page { display: none; }
+  .page.active { display: block; }
+
+  .footer-note {
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+    font-size: 11.5px;
+    color: var(--muted);
+    font-weight: 300;
+    line-height: 1.7;
+  }
+  .highlight { color: var(--accent-a); }
+</style>
+</head>
+<body>
+
+<header class="header">
+  <div class="header-logo">Upper 30</div>
+  <nav class="header-nav">
+    <button class="nav-btn active" onclick="showPage('treinos',this)">Treinos</button>
+    <button class="nav-btn" onclick="showPage('calendario',this)">Calendário</button>
+    <button class="nav-btn" onclick="showPage('progressao',this)">Progressão</button>
+    <button class="nav-btn" onclick="showPage('tracker',this)">Tracker</button>
+  </nav>
+</header>
+
+<main class="main">
+
+  <!-- TREINOS -->
+  <div class="page active" id="page-treinos">
+    <div class="hero">
+      <div>
+        <h1 class="hero-title">Guia de Treino<br><span>Superior — 30 Dias</span></h1>
+        <p class="hero-sub">Sem pernas · Recuperação de tornozelo · Sobrecarga progressiva</p>
+      </div>
+      <div class="imc-grid">
+        <div class="stat-card">
+          <div class="stat-label">Altura</div>
+          <div class="stat-val">1,75m</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-label">Peso</div>
+          <div class="stat-val">90kg</div>
+        </div>
+        <div class="stat-card" style="grid-column: span 2">
+          <div class="stat-label">IMC</div>
+          <div class="stat-val imc-warn">29,4</div>
+          <div class="stat-sub">Sobrepeso — faixa 25–29,9</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="alert">
+      <div class="alert-icon">⚠</div>
+      <div><strong>Entorse grau 2 no tornozelo:</strong> todos os exercícios foram selecionados para serem executados sentado ou com apoio de banco. Nos supinos, coloque os pés sobre o banco em vez do chão. Nas remadas, use joelho + mão como apoio.</div>
+    </div>
+
+    <div class="section-head"><div class="section-title">Selecione o treino</div><div class="section-line"></div></div>
+
+    <div class="tabs">
+      <button class="tab on-a" onclick="showTreino('A',this)">Treino A — Peito + Tríceps + Ombro</button>
+      <button class="tab" onclick="showTreino('B',this)">Treino B — Costas + Bíceps</button>
+      <button class="tab" onclick="showTreino('C',this)">Treino C — Ombros + Core</button>
+    </div>
+
+    <div class="ex-list" id="ex-list"></div>
+
+    <div class="footer-note">
+      Base científica: treinamento de cada grupo muscular <span class="highlight">2–3x/semana</span> é o consenso atual para maximizar hipertrofia (Schoenfeld et al.). A divisão A/B/C com tríceps junto ao peito e bíceps junto às costas aproveita a pré-fadiga dos músculos sinergistas nos compostos.
+    </div>
+  </div>
+
+  <!-- CALENDÁRIO -->
+  <div class="page" id="page-calendario">
+    <div class="section-head"><div class="section-title">Calendário — 30 dias</div><div class="section-line"></div></div>
+    <div id="calendar-area"></div>
+  </div>
+
+  <!-- PROGRESSÃO -->
+  <div class="page" id="page-progressao">
+    <div class="section-head"><div class="section-title">Progressão de carga — 4 semanas</div><div class="section-line"></div></div>
+
+    <div class="prog-grid">
+      <div class="prog-card">
+        <div class="prog-week">Semana 1</div>
+        <div class="prog-strat">Adaptação neural</div>
+        <div class="prog-detail">
+          <div class="prog-pill"><strong>3 séries</strong> / exercício</div>
+          <div class="prog-pill"><strong>12–15 reps</strong></div>
+          <div class="prog-pill">Carga <strong>60–65%</strong></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;font-weight:300;line-height:1.6">Foco em aprender os movimentos com técnica correta. Não vá até a falha. O objetivo é acumular volume sem gerar fadiga excessiva.</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-week">Semana 2</div>
+        <div class="prog-strat">Aumento de volume</div>
+        <div class="prog-detail">
+          <div class="prog-pill"><strong>4 séries</strong> / exercício</div>
+          <div class="prog-pill"><strong>10–12 reps</strong></div>
+          <div class="prog-pill">Carga <strong>65–70%</strong></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;font-weight:300;line-height:1.6">Adicione uma série por exercício. Aproxime-se da falha nas últimas 2 reps da última série. Anote os pesos usados.</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-week">Semana 3</div>
+        <div class="prog-strat">Sobrecarga progressiva</div>
+        <div class="prog-detail">
+          <div class="prog-pill"><strong>4 séries</strong> / exercício</div>
+          <div class="prog-pill"><strong>8–12 reps</strong></div>
+          <div class="prog-pill">Carga <strong>70–75%</strong></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;font-weight:300;line-height:1.6">Aumente 2,5–5 kg ou adicione 2 reps em relação à semana anterior. Se não conseguir, mantenha o peso — nunca sacrifique a técnica.</p>
+      </div>
+      <div class="prog-card">
+        <div class="prog-week">Semana 4</div>
+        <div class="prog-strat">Deload ativo</div>
+        <div class="prog-detail">
+          <div class="prog-pill"><strong>2–3 séries</strong> / exercício</div>
+          <div class="prog-pill"><strong>10–12 reps</strong></div>
+          <div class="prog-pill">Carga <strong>60–65%</strong></div>
+        </div>
+        <p style="font-size:12px;color:var(--muted);margin-top:10px;font-weight:300;line-height:1.6">Reduza o volume mas mantenha a intensidade. O músculo cresce durante a recuperação — o deload prepara o corpo para o próximo ciclo.</p>
+      </div>
+    </div>
+
+    <div style="margin-top:2rem">
+    <div class="section-head"><div class="section-title">Regras de progressão</div><div class="section-line"></div></div>
+    <div class="tip-grid">
+      <div class="tip-card">
+        <div class="tip-icon">📈</div>
+        <div class="tip-title">Regra das 2 reps extras</div>
+        <div class="tip-body">Se na última série você sentir que poderia fazer 5+ reps a mais, aumente 2,5 kg na próxima sessão. Se conseguir somente +1–2, mantenha o peso e tente mais reps.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">📋</div>
+        <div class="tip-title">Anote sempre</div>
+        <div class="tip-body">Registre peso × séries × reps em cada treino. Sem anotação, não há progressão real — você treina no escuro.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🔁</div>
+        <div class="tip-title">Progressão dupla</div>
+        <div class="tip-body">Quando atingir o teto de reps (ex: 12), aumente a carga. Quando a carga aumentar, volte ao piso de reps (ex: 8). Esse ciclo gera hipertrofia contínua.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">⏱</div>
+        <div class="tip-title">Tempo de descanso</div>
+        <div class="tip-body">Compostos: 2–3 min. Isolamentos: 60–90 seg. Descanso curto demais = queda de performance e menos ganho.</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">🥩</div>
+        <div class="tip-title">Proteína</div>
+        <div class="tip-body">Mínimo de 1,6g/kg/dia para hipertrofia = 144g/dia. Distribua em 4–5 refeições. Priorize fontes completas (frango, ovo, whey).</div>
+      </div>
+      <div class="tip-card">
+        <div class="tip-icon">😴</div>
+        <div class="tip-title">Sono = treino</div>
+        <div class="tip-body">7–9h de sono por noite. GH e testosterona são liberados principalmente durante o sono profundo — dormir mal sabota os ganhos diretamente.</div>
+      </div>
+    </div>
+    </div>
+  </div>
+
+  <!-- TRACKER -->
+  <div class="page" id="page-tracker">
+    <div class="section-head"><div class="section-title">Marque os treinos concluídos</div><div class="section-line"></div></div>
+    <div class="tracker-grid" id="tracker-grid"></div>
+    <div style="margin-top:1rem;font-size:12px;color:var(--muted)">Clique no dia para marcar como concluído. Os dados são salvos no navegador.</div>
+  </div>
+
+</main>
+
+<script>
+const TREINOS = {
+  A: {
+    foco: 'Peito + Tríceps + Ombro Anterior',
+    cor: 'a',
+    exercicios: [
+      { n: 'Supino reto com halteres', tipo: 'c', musculo: 'Peitoral maior', obs: 'Deitado no banco — pés sobre o banco, não no chão (tornozelo)' },
+      { n: 'Crucifixo inclinado com halteres', tipo: 'i', musculo: 'Peitoral — porção superior', obs: 'Banco a 30°, cotovelos levemente flexionados, amplitude controlada' },
+      { n: 'Desenvolvimento com halteres (sentado)', tipo: 'c', musculo: 'Deltóide anterior + lateral', obs: 'Costas encostadas no banco — protege a lombar durante o movimento' },
+      { n: 'Elevação frontal com halter', tipo: 'i', musculo: 'Deltóide anterior', obs: 'Sentado, alternado, sem balançar o tronco' },
+      { n: 'Tríceps no cabo — barra reta', tipo: 'i', musculo: 'Tríceps — todas as porções', obs: 'Cotovelos fixos ao lado do tronco; apenas o antebraço se move' },
+      { n: 'Tríceps francês com halter', tipo: 'i', musculo: 'Tríceps — porção longa', obs: 'Sentado, cotovelos apontados para cima; mantém tensão na porção longa' },
+    ]
+  },
+  B: {
+    foco: 'Costas + Bíceps',
+    cor: 'b',
+    exercicios: [
+      { n: 'Puxada no pulley (lat pulldown)', tipo: 'c', musculo: 'Grande dorsal + Redondo maior', obs: 'Sentado — exercício principal para largura das costas; pegada pronada, largura dos ombros' },
+      { n: 'Remada unilateral com halter', tipo: 'c', musculo: 'Rombóides + Latíssimo + Trapézio médio', obs: 'Joelho + mão ipsilateral no banco para apoio — tornozelo fora da carga' },
+      { n: 'Remada curvada com barra', tipo: 'c', musculo: 'Trapézio + Rombóides + Lat', obs: 'Use banco Scott como apoio de peito se necessário para neutralizar o tornozelo' },
+      { n: 'Rosca direta com barra', tipo: 'i', musculo: 'Bíceps braquial', obs: 'Sentado ou banco Scott — cotovelos fixos, sem impulso de quadril' },
+      { n: 'Rosca concentrada com halter', tipo: 'i', musculo: 'Bíceps — pico de contração', obs: 'Sentado, cotovelo apoiado na face interna da coxa — máxima isolação' },
+      { n: 'Encolhimento de ombros com halteres', tipo: 'i', musculo: 'Trapézio superior', obs: 'Sentado — movimento puro de elevação escapular, sem girar os ombros' },
+    ]
+  },
+  C: {
+    foco: 'Ombros + Core Superior',
+    cor: 'c',
+    exercicios: [
+      { n: 'Elevação lateral com halteres', tipo: 'i', musculo: 'Deltóide medial', obs: 'Sentado, amplitude de 90° — músculo mais negligenciado do ombro' },
+      { n: 'Desenvolvimento Arnold (sentado)', tipo: 'c', musculo: 'Deltóide — 3 porções', obs: 'Banco reclinado a 80°, costas apoiadas; movimento de rotação pronação → supinação' },
+      { n: 'Remada alta com halteres', tipo: 'c', musculo: 'Deltóide + Trapézio superior', obs: 'Sentado ou em pé estável; cotovelos sobem acima dos punhos' },
+      { n: 'Facepull no cabo', tipo: 'i', musculo: 'Deltóide posterior + Rombóides', obs: 'Polia na altura dos olhos; essencial para saúde do manguito rotador — não negligencie' },
+      { n: 'Prancha no banco (modificada)', tipo: 'c', musculo: 'Core — transverso + reto abdominal', obs: 'Cotovelos no banco, joelhos no chão se necessário — nenhum peso sobre o tornozelo' },
+      { n: 'Abdominal bicicleta sentado', tipo: 'i', musculo: 'Oblíquos + Reto abdominal', obs: 'Sentado na borda do banco, cotovelo → joelho contralateral; tornozelo não apoia no chão' },
+    ]
+  }
+};
+
+const CICLO = ['A','B','C','rest','A','B','C','rest','A','B','C','rest','A','B','C','rest','A','B','C','rest','A','B','C','rest','A','B','C','rest','A','B'];
+const DIAS_SM = ['Seg','Ter','Qua','Qui','Sex','Sáb','Dom'];
+const COLS = { A: 'col-a', B: 'col-b', C: 'col-c', rest: 'col-r' };
+const SEL = { A: 'sel-a', B: 'sel-b', C: 'sel-c', rest: 'sel-r' };
+
+let currentTab = 'A';
+
+function showPage(id, btn) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  btn.classList.add('active');
+}
+
+function showTreino(key, btn) {
+  currentTab = key;
+  document.querySelectorAll('.tab').forEach(t => t.className = 'tab');
+  btn.className = 'tab on-' + TREINOS[key].cor;
+  renderExercicios();
+}
+
+function renderExercicios() {
+  const t = TREINOS[currentTab];
+  const list = document.getElementById('ex-list');
+  list.innerHTML = t.exercicios.map((e, i) => `
+    <div class="ex-card">
+      <div class="ex-num">${String(i+1).padStart(2,'0')}</div>
+      <div>
+        <div class="ex-name">${e.n}</div>
+        <div class="ex-muscle">${e.musculo}</div>
+        <div class="ex-obs">${e.obs}</div>
+      </div>
+      <div>
+        <span class="badge ${e.tipo === 'c' ? 'badge-c' : 'badge-i'}">${e.tipo === 'c' ? 'Composto' : 'Isolamento'}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function renderCalendar() {
+  const area = document.getElementById('calendar-area');
+  let html = '';
+  for (let w = 0; w < 4; w++) {
+    html += `<div class="week-label">Semana ${w+1}</div><div class="calendar-grid">`;
+    for (let d = 0; d < 7; d++) {
+      const idx = w * 7 + d;
+      if (idx >= 30) { html += '<div></div>'; continue; }
+      const t = CICLO[idx];
+      const isRest = t === 'rest';
+      const label = isRest ? 'Desc.' : 'Treino ' + t;
+      const sub = isRest ? 'Recuperação' : TREINOS[t].foco.split('+')[0].trim();
+      html += `<div class="cal-day sel ${SEL[t]}">
+        <div class="cal-wd">${DIAS_SM[d]}</div>
+        <div class="cal-n ${COLS[t]}">${label}</div>
+        <div class="cal-sub">${sub}</div>
+      </div>`;
+    }
+    html += '</div>';
+  }
+  area.innerHTML = html;
+}
+
+function renderTracker() {
+  const stored = JSON.parse(localStorage.getItem('upper30_done') || '[]');
+  const grid = document.getElementById('tracker-grid');
+  grid.innerHTML = Array.from({length:30}, (_,i) => {
+    const done = stored.includes(i);
+    const t = CICLO[i];
+    const isRest = t === 'rest';
+    const label = isRest ? '—' : t;
+    return `<div class="tracker-day ${done ? 'done' : ''}" onclick="toggleDay(${i})" title="Dia ${i+1}">${done ? '✓' : i+1}</div>`;
+  }).join('');
+}
+
+function toggleDay(idx) {
+  let stored = JSON.parse(localStorage.getItem('upper30_done') || '[]');
+  if (stored.includes(idx)) stored = stored.filter(d => d !== idx);
+  else stored.push(idx);
+  localStorage.setItem('upper30_done', JSON.stringify(stored));
+  renderTracker();
+}
+
+renderExercicios();
+renderCalendar();
+renderTracker();
+</script>
+</body>
+</html>

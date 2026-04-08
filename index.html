@@ -276,19 +276,8 @@
   </nav>
 </div>
 
-<!-- CELEBRATION -->
-<div class="celebration-bg" id="cel-bg" onclick="closeCelebration()"></div>
-<div class="celebration-overlay" id="cel-overlay" onclick="closeCelebration()">
-  <div class="celebration-card" id="cel-card">
-    <span class="celebration-icon" id="cel-icon">💪</span>
-    <div class="celebration-title">Treino salvo!</div>
-    <div class="celebration-sub" id="cel-sub">Excelente trabalho. Continue assim!</div>
-  </div>
-</div>
-<div class="confetti-wrap" id="confetti-wrap"></div>
-
-<!-- MODAL CRIAR CONTA -->
-<div class="modal-overlay hidden" id="modal-register">
+<!-- MODAL LOGIN — criar conta (fora do app, mas controlado) -->
+<div id="modal-register" style="display:none;position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);align-items:flex-end;justify-content:center;padding:1rem">
   <div class="modal">
     <h3>Criar conta</h3>
     <p>Seus treinos serão salvos na nuvem e sincronizados em todos os dispositivos.</p>
@@ -312,7 +301,19 @@
   </div>
 </div>
 
-<div class="toast" id="toast"></div>
+<!-- CELEBRATION — só aparece após salvar treino -->
+<div id="cel-bg"      style="display:none;position:fixed;inset:0;z-index:299;background:rgba(8,9,9,.8);backdrop-filter:blur(4px)" onclick="closeCelebration()"></div>
+<div id="cel-overlay" style="display:none;position:fixed;inset:0;z-index:300;align-items:center;justify-content:center" onclick="closeCelebration()">
+  <div class="celebration-card" id="cel-card">
+    <span class="celebration-icon" id="cel-icon">💪</span>
+    <div class="celebration-title">Treino salvo!</div>
+    <div class="celebration-sub" id="cel-sub">Excelente trabalho. Continue assim!</div>
+  </div>
+</div>
+<div id="confetti-wrap" style="position:fixed;inset:0;z-index:301;pointer-events:none;overflow:hidden"></div>
+
+<!-- TOAST -->
+<div id="toast" style="position:fixed;bottom:80px;left:50%;transform:translateX(-50%) translateY(20px);background:#191c1e;border:1px solid rgba(255,255,255,.11);border-radius:12px;padding:11px 20px;font-size:13px;font-weight:500;z-index:400;opacity:0;transition:all .3s cubic-bezier(.34,1.56,.64,1);white-space:nowrap;pointer-events:none;max-width:90vw;font-family:'Outfit',sans-serif;color:#eeecea"></div>
 
 <script>
 const TREINOS = {
@@ -471,15 +472,15 @@ function showCelebration(treino){
   const t=TREINOS[treino];
   document.getElementById('cel-icon').textContent=t.celebIcon;
   document.getElementById('cel-sub').textContent=t.celebMsg;
-  document.getElementById('cel-bg').classList.add('show');
-  document.getElementById('cel-overlay').classList.add('active');
+  document.getElementById('cel-bg').style.display='block';
+  document.getElementById('cel-overlay').style.display='flex';
   setTimeout(()=>document.getElementById('cel-card').classList.add('show'),50);
   spawnConfetti();
   setTimeout(closeCelebration,3500);
 }
 function closeCelebration(){
-  document.getElementById('cel-bg').classList.remove('show');
-  document.getElementById('cel-overlay').classList.remove('active');
+  document.getElementById('cel-bg').style.display='none';
+  document.getElementById('cel-overlay').style.display='none';
   document.getElementById('cel-card').classList.remove('show');
   document.getElementById('confetti-wrap').innerHTML='';
 }
@@ -638,9 +639,17 @@ function showTab(id){
   prevTab=id;
   document.querySelector('.app-content').scrollTo({top:0,behavior:'smooth'});
 }
-function showToast(msg,type='success'){const t=document.getElementById('toast');t.textContent=msg;t.className='toast '+type+' show';setTimeout(()=>t.className='toast',3200);}
-function showRegisterModal(){document.getElementById('modal-register').classList.remove('hidden');}
-function closeModal(id){document.getElementById(id).classList.add('hidden');}
+function showToast(msg,type='success'){
+  const t=document.getElementById('toast');
+  t.textContent=msg;
+  t.style.color=type==='success'?'#c8f060':'#e05a5a';
+  t.style.borderColor=type==='success'?'rgba(200,240,96,.4)':'rgba(224,90,90,.4)';
+  t.style.opacity='1';
+  t.style.transform='translateX(-50%) translateY(0)';
+  setTimeout(()=>{t.style.opacity='0';t.style.transform='translateX(-50%) translateY(20px)';},3200);
+}
+function showRegisterModal(){document.getElementById('modal-register').style.display='flex';}
+function closeModal(id){document.getElementById(id).style.display='none';}
 
 (function init(){
   initFirebase({

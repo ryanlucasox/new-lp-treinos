@@ -949,9 +949,12 @@ body {
   align-items: flex-end;
   justify-content: center;
   padding: 1rem;
-  animation: fadeIn .2s ease;
 }
-.modal-overlay.hidden { display: none; }
+.modal-overlay.hidden {
+  display: none !important;
+  pointer-events: none !important;
+  visibility: hidden !important;
+}
 .modal {
   background: var(--bg2);
   border: 1px solid var(--border2);
